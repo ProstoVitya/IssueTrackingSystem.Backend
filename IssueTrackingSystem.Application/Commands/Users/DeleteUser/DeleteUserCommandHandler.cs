@@ -2,6 +2,7 @@
 using IssueTrackingSystem.Application.Interfaces;
 using IssueTrackingSystem.Domain.Users;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace IssueTrackingSystem.Application.Commands.Users.DeleteUser;
 
@@ -22,9 +23,9 @@ public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand>
         await _dbContext.SaveChangesAsync(cancellationToken);
     }
 
-    private async Task<User> GetUser(int userId, CancellationToken cancellationToken)
+    private async Task<User> GetUser(Guid userId, CancellationToken cancellationToken)
     {
-        var user = await _dbContext.Users.FindAsync(new object[] { userId }, cancellationToken);
+        var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == userId, cancellationToken);
         if (user == null)
         {
             throw new NotFoundException(nameof(User), userId);

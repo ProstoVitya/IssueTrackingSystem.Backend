@@ -4,5 +4,5 @@ namespace IssueTrackingSystem.Application.Commands.Users.DeleteUser;
 
 public class DeleteUserCommand : IRequest
 {
-    public int Id { get; }
+    public Guid Id { get; }
 }

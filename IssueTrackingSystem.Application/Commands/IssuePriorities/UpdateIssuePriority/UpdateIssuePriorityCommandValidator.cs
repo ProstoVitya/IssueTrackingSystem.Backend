@@ -6,6 +6,8 @@ public class UpdateIssuePriorityCommandValidator : AbstractValidator<UpdateIssue
 {
     public UpdateIssuePriorityCommandValidator()
     {
+        RuleFor(updateIssuePriorityCommand => updateIssuePriorityCommand.Id)
+            .GreaterThan(0);
         RuleFor(updateIssuePriorityCommand => updateIssuePriorityCommand.Name)
             .NotNull()
             .NotEqual(string.Empty);

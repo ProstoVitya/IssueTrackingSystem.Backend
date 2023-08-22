@@ -6,6 +6,8 @@ public class UpdateProjectCommandValidator : AbstractValidator<UpdateProjectComm
 {
     public UpdateProjectCommandValidator()
     {
+        RuleFor(updateProjectCommand => updateProjectCommand.Id)
+            .GreaterThan(0);
         RuleFor(updateProjectCommand => updateProjectCommand.Name)
             .NotNull()
             .NotEqual(string.Empty);

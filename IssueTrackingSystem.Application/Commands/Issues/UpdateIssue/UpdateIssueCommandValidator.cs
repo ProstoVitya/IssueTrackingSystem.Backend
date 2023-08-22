@@ -6,6 +6,10 @@ public class UpdateIssueCommandValidator : AbstractValidator<UpdateIssueCommand>
 {
     public UpdateIssueCommandValidator()
     {
+        RuleFor(updateIssueCommand => updateIssueCommand.IssueIndex)
+            .GreaterThan(0);
+        RuleFor(updateIssueCommand => updateIssueCommand.ProjectId)
+            .GreaterThan(0);
         RuleFor(updateIssueCommand => updateIssueCommand.Name)
             .NotEmpty();
         RuleFor(updateIssueCommand => updateIssueCommand.Finished)

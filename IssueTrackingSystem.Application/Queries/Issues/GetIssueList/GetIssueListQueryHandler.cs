@@ -20,10 +20,10 @@ public class GetIssueListQueryHandler : IRequestHandler<GetIssueListQuery, Issue
     public async Task<IssueListVm> Handle(GetIssueListQuery request, CancellationToken cancellationToken)
     {
         List<IssueLookupDto> issues;
-        if (request.Project != null)
+        if (request.ProjectId != 0)
         {
             //TODO: как сделать запросы по разным параметрам НОРАМАЛЬНО
-            issues = await _dbContext.Issues.Where(issue => issue.Project.Id == request.Project.Id)
+            issues = await _dbContext.Issues.Where(issue => issue.Project.Id == request.ProjectId)
                 .ProjectTo<IssueLookupDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
         }

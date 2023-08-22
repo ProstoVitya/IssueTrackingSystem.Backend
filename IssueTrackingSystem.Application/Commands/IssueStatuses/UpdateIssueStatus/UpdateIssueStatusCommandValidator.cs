@@ -6,6 +6,8 @@ public class UpdateIssueStatusCommandValidator : AbstractValidator<UpdateIssueSt
 {
     public UpdateIssueStatusCommandValidator()
     {
+        RuleFor(updateIssueStatusCommand => updateIssueStatusCommand.Id)
+            .GreaterThan(0);
         RuleFor(updateIssueStatusCommand => updateIssueStatusCommand.Name)
             .NotNull()
             .NotEqual(string.Empty);
