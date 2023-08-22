@@ -3,6 +3,7 @@ using IssueTrackingSystem.Application;
 using IssueTrackingSystem.Application.Common.Mappings;
 using IssueTrackingSystem.Application.Interfaces;
 using IssueTrackingSystem.Persistence;
+using IssueTrackingSystem.WebApi.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,9 +40,16 @@ catch (Exception exception)
 }
 
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+
+app.UseExceptionHandler();
+app.UseRouting();
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
-app.UseRouting();
 
 app.UseEndpoints(endpoints =>
 {
