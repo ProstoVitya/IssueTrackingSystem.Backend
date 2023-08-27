@@ -24,11 +24,13 @@ public class CreateIssueCommandHandler : IRequestHandler<CreateIssueCommand>
         var issuePriority = await issueDao.GetIssuePriorityByIdAsync(request.PriorityId, cancellationToken);
         var status = await issueDao.GetIssueStatusByIdAsync(request.IssueTypeId, cancellationToken);
         var project = await issueDao.GetIssueProjectByIdAsync(request.IssueTypeId, cancellationToken);
+        var issueIndex = await issueDao.GetProjectIssueIndexByProjectIdAsync(project.Id, cancellationToken);
 
         var issue = new Issue
         {
+            Index = issueIndex.Index,
             Name = request.Name,
-            ProjectKey = request.ProjectId,
+            ProjectId = project.Id,
             Description = request.Description,
             StoryPoints = request.StoryPoints,
             Created = DateTime.Now,

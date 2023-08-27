@@ -1,6 +1,7 @@
 ﻿using IssueTrackingSystem.Application.Queries.IssuePriorities.GetIssuePriorityDetails;
 using IssueTrackingSystem.Application.Queries.IssueStatuses.GetIssueStatusDetails;
 using IssueTrackingSystem.Application.Queries.IssueTypes.GetIssueTypeDetails;
+using IssueTrackingSystem.Application.Queries.ProjectIssueIndexes.GetProjectIssueIndex;
 using IssueTrackingSystem.Application.Queries.Projects.GetProject;
 using IssueTrackingSystem.Application.Queries.Users.GetUserDetails;
 using IssueTrackingSystem.Domain;
@@ -19,7 +20,7 @@ internal class IssueRelatedInfoDao
         _mediator = mediator;
     }
     
-    public async Task<User> GetUserByIdAsync(Guid userId, CancellationToken cancellationToken)
+    public async Task<User> GetUserByIdAsync(Guid userId, CancellationToken cancellationToken = default)
     {
         var userRequest = new GetUserDetailsQuery
         {
@@ -29,7 +30,7 @@ internal class IssueRelatedInfoDao
         return user;
     }
 
-    public async Task<IssueType> GetIssueTypeByIdAsync(int typeId, CancellationToken cancellationToken)
+    public async Task<IssueType> GetIssueTypeByIdAsync(int typeId, CancellationToken cancellationToken = default)
     {
         var issueTypeRequest = new GetIssueTypeDetailsQuery
         {
@@ -39,7 +40,7 @@ internal class IssueRelatedInfoDao
         return issueType;
     }
 
-    public async Task<IssuePriority> GetIssuePriorityByIdAsync(int priorityId, CancellationToken cancellationToken)
+    public async Task<IssuePriority> GetIssuePriorityByIdAsync(int priorityId, CancellationToken cancellationToken = default)
     {
         var priorityRequest = new GetIssuePriorityDetailsQuery
         {
@@ -50,7 +51,7 @@ internal class IssueRelatedInfoDao
         return priority;
     }
 
-    public async Task<IssueStatus> GetIssueStatusByIdAsync(int statusId, CancellationToken cancellationToken)
+    public async Task<IssueStatus> GetIssueStatusByIdAsync(int statusId, CancellationToken cancellationToken = default)
     {
         var statusRequest = new GetIssueStatusDetailsQuery
         {
@@ -61,7 +62,7 @@ internal class IssueRelatedInfoDao
         return status;
     }
 
-    public async Task<Project> GetIssueProjectByIdAsync(int projectId, CancellationToken cancellationToken)
+    public async Task<Project> GetIssueProjectByIdAsync(int projectId, CancellationToken cancellationToken = default)
     {
         var projectRequest = new GetProjectQuery
         {
@@ -70,5 +71,16 @@ internal class IssueRelatedInfoDao
 
         var project = await _mediator.Send(projectRequest, cancellationToken);
         return project;
+    }
+
+    public async Task<ProjectIssueIndex> GetProjectIssueIndexByProjectIdAsync(int projectId,
+        CancellationToken cancellationToken = default)
+    {
+        var indexRequest = new GetProjectIssueIndexQuery
+        {
+            ProjectId = projectId
+        };
+        var index = await _mediator.Send(indexRequest, cancellationToken);
+        return index;
     }
 }

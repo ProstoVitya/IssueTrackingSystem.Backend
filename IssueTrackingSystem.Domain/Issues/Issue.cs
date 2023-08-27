@@ -4,8 +4,8 @@ namespace IssueTrackingSystem.Domain.Issues;
 
 public class Issue
 {
-    public int Id { get; set; }
-    public int ProjectKey { get; set; }
+    public int Index { get; set; }
+    public int ProjectId { get; set; }
     public string Name { get; set; }
     public string? Description { get; set; }
     public int StoryPoints { get; set; }

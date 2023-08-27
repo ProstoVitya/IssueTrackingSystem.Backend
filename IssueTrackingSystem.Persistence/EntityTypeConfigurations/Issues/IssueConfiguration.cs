@@ -8,10 +8,7 @@ public class IssueConfiguration : IEntityTypeConfiguration<Issue>
 {
     public void Configure(EntityTypeBuilder<Issue> builder)
     {
-        builder.HasKey(issue => new { issue.ProjectKey, issue.Id });
-        /*builder.HasKey(issue => issue.Index);
-        builder.HasKey(issue => issue.ProjectKey);*/
-        //builder.HasIndex(issue => issue.Id).IsUnique();
+        builder.HasKey(issue => new { issue.ProjectId, issue.Index});
         builder.Property(issue => issue.Name).IsRequired();
 
         builder.HasOne(issue => issue.Author);

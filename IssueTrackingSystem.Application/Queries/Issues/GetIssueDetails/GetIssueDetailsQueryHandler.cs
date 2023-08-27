@@ -24,7 +24,7 @@ public class GetIssueDetailsQueryHandler : IRequestHandler<GetIssueDetailsQuery,
     private async Task<Issue> GetIssueAsync(GetIssueDetailsQuery request, CancellationToken cancellationToken)
     {
         var entity = await _dbContext.Issues.FirstOrDefaultAsync(issue =>
-            new { IssueIndex = issue.Id, ProjectId = issue.ProjectKey } == new { request.IssueIndex, request.ProjectId },
+            new { issue.ProjectId, IssueIndex = issue.Index } == new { request.ProjectId, request.IssueIndex },
             cancellationToken);
 
         if (entity == null)

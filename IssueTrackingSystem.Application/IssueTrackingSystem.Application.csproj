@@ -22,6 +22,7 @@
     <ItemGroup>
       <Folder Include="Commands\Projects" />
       <Folder Include="Commands\Users" />
+      <Folder Include="Events\Project" />
       <Folder Include="Queries\Users" />
     </ItemGroup>
 

@@ -18,4 +18,5 @@ public class IssueDbContext : DbContext, IIssueDbContext
     public DbSet<Role> Roles { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<Rights> Rights { get; set; }
+    public DbSet<ProjectIssueIndex> ProjectIssueIndexes { get; set; }
 }

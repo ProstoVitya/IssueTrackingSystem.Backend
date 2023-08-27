@@ -6,9 +6,9 @@ public class GetIssueDetailsQueryValidator : AbstractValidator<GetIssueDetailsQu
 {
     public GetIssueDetailsQueryValidator()
     {
-        RuleFor(query => query.IssueIndex)
-            .GreaterThan(0);
         RuleFor(query => query.ProjectId)
+            .GreaterThan(0);
+        RuleFor(query => query.IssueIndex)
             .GreaterThan(0);
     }
 }

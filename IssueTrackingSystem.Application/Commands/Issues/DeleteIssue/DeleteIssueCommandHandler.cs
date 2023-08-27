@@ -25,7 +25,7 @@ public class DeleteIssueCommandHandler : IRequestHandler<DeleteIssueCommand>
     private async Task<Issue> GetIssueAsync(DeleteIssueCommand request, CancellationToken cancellationToken)
     {
         var entity = await _issueDbContext.Issues.FirstOrDefaultAsync(issue =>
-            new { ProjectId = issue.ProjectKey, Index = issue.Id } == new { request.ProjectId, Index = request.IssueIndex },
+            new { issue.ProjectId, issue.Index } == new { request.ProjectId, Index = request.IssueIndex },
             cancellationToken);
 
         if (entity == null)
